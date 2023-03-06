@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Solomon Chak">
+<meta name="dcterms.date" content="2023-03-06">
+
+<title>R dataframe</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="R_dataframe_files/libs/clipboard/clipboard.min.js"></script>
+<script src="R_dataframe_files/libs/quarto-html/quarto.js"></script>
+<script src="R_dataframe_files/libs/quarto-html/popper.min.js"></script>
+<script src="R_dataframe_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="R_dataframe_files/libs/quarto-html/anchor.min.js"></script>
+<link href="R_dataframe_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="R_dataframe_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="R_dataframe_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="R_dataframe_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="R_dataframe_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#aim" id="toc-aim" class="nav-link active" data-scroll-target="#aim"><span class="toc-section-number">1</span>  Aim</a></li>
+  <li><a href="#install-load-packages" id="toc-install-load-packages" class="nav-link" data-scroll-target="#install-load-packages"><span class="toc-section-number">2</span>  Install &amp; load packages</a></li>
+  <li><a href="#what-is-a-dataframe" id="toc-what-is-a-dataframe" class="nav-link" data-scroll-target="#what-is-a-dataframe"><span class="toc-section-number">3</span>  What is a dataframe?</a></li>
+  <li><a href="#call-rows-and-columns" id="toc-call-rows-and-columns" class="nav-link" data-scroll-target="#call-rows-and-columns"><span class="toc-section-number">4</span>  Call rows and columns</a></li>
+  <li><a href="#sort" id="toc-sort" class="nav-link" data-scroll-target="#sort"><span class="toc-section-number">5</span>  Sort</a></li>
+  <li><a href="#subset" id="toc-subset" class="nav-link" data-scroll-target="#subset"><span class="toc-section-number">6</span>  Subset</a></li>
+  <li><a href="#new-column" id="toc-new-column" class="nav-link" data-scroll-target="#new-column"><span class="toc-section-number">7</span>  New column</a></li>
+  <li><a href="#combine-data-frames" id="toc-combine-data-frames" class="nav-link" data-scroll-target="#combine-data-frames"><span class="toc-section-number">8</span>  Combine data frames</a></li>
+  <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment"><span class="toc-section-number">9</span>  Assignment</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">R dataframe</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Solomon Chak </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 6, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="aim" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Aim</h1>
+<p>This is an introduction for Intro. Bioinformatics student to “play” with dataframes in R.</p>
+<p>You will learn to do the following:</p>
+<ul>
+<li><p>extract data from rows and columns in a dataframe</p></li>
+<li><p>sort a dataframe</p></li>
+<li><p>subset rows of a dataframe based on values in columns</p></li>
+<li><p>create new columns based on existing columns</p></li>
+<li><p>combine dataframes</p></li>
+</ul>
+</section>
+<section id="install-load-packages" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Install &amp; load packages</h1>
+<p>We will need to install two packages. Once this is done, you won’t need to install again.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>But you will need to load the library everytime:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyr"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="what-is-a-dataframe" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> What is a dataframe?</h1>
+<p>In R, dataframe is a table format. Most of the time, you would import a large spreadsheet, or delimited text file into R as a dataframe. For example, we have imported the .gff3 file as a dataframe in Assignment 8 and 9.</p>
+<p>Rerun this if you’re not in the same Project as Assignment 8. If you haven’t, click this <a href="https://ftp.ensembl.org/pub/release-109/gff3/drosophila_melanogaster/Drosophila_melanogaster.BDGP6.32.109.chr.gff3.gz">link</a> to download the compressed file (.gff3.gz). Then either put it in your working directory or upload it to posit.cloud, so that Rstudio has access to it.</p>
+<p>This is an annotation file (.gff3) of <a href="https://useast.ensembl.org/Drosophila_melanogaster/Info/Index?db=core"><strong><em>Drosophila melanogaster</em></strong> (BDGP6.32)</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>gff <span class="ot">=</span> <span class="fu">read.delim</span>(<span class="fu">gzfile</span>(<span class="st">"Drosophila_melanogaster.BDGP6.32.109.chr.gff3.gz"</span>), <span class="at">header=</span>F, <span class="at">comment.char=</span><span class="st">"#"</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"seqid"</span>, <span class="st">"source"</span>, <span class="st">"type"</span>, <span class="st">"start"</span> , <span class="st">"end"</span>,  <span class="st">"score"</span>, <span class="st">"strand"</span>,  <span class="st">"phase"</span>, <span class="st">"attributes"</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  seqid   source                      type start      end score strand phase
+1    2L BDGP6.32                    region     1 23513712     .      .     .
+2    2L  FlyBase                pseudogene  7529     9484     .      +     .
+3    2L  FlyBase    pseudogenic_transcript  7529     9484     .      +     .
+4    2L  FlyBase                      exon  7529     8116     .      +     .
+5    2L  FlyBase                      exon  8193     9484     .      +     .
+6    2L  FlyBase transposable_element_gene  9726     9859     .      +     .
+                                                                                                                            attributes
+1                                                                   ID=region:2L;Alias=AE014134,NT_033779,AE014134.6,NT_033779.5,chr2L
+2                             ID=gene:FBgn0031208;Name=CR11023;biotype=pseudogene;gene_id=FBgn0031208;logic_name=refseq_import_visible
+3 ID=transcript:FBtr0475186;Parent=gene:FBgn0031208;Name=CR11023-RE;biotype=pseudogene;tag=Ensembl_canonical;transcript_id=FBtr0475186
+4 Parent=transcript:FBtr0475186;Name=FBtr0475186-E1;constitutive=1;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=FBtr0475186-E1;rank=1
+5 Parent=transcript:FBtr0475186;Name=FBtr0475186-E2;constitutive=1;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=FBtr0475186-E2;rank=2
+6                                ID=gene:FBti0060580;biotype=transposable_element;gene_id=FBti0060580;logic_name=refseq_import_visible</code></pre>
+</div>
+</div>
+<p>We can check the class of data by:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(gff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+</div>
+<p>We can summarize a dataframe to get some ideas of what it is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    seqid              source              type               start         
+ Length:503280      Length:503280      Length:503280      Min.   :       1  
+ Class :character   Class :character   Class :character   1st Qu.: 7222717  
+ Mode  :character   Mode  :character   Mode  :character   Median :12812830  
+                                                          Mean   :13210764  
+                                                          3rd Qu.:19174339  
+                                                          Max.   :32078883  
+      end              score              strand             phase          
+ Min.   :      65   Length:503280      Length:503280      Length:503280     
+ 1st Qu.: 7223898   Class :character   Class :character   Class :character  
+ Median :12814880   Mode  :character   Mode  :character   Mode  :character  
+ Mean   :13212331                                                           
+ 3rd Qu.:19174783                                                           
+ Max.   :32079331                                                           
+  attributes       
+ Length:503280     
+ Class :character  
+ Mode  :character  
+                   
+                   
+                   </code></pre>
+</div>
+</div>
+<p>We can check the column names of a dataframe:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(gff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "seqid"      "source"     "type"       "start"      "end"       
+[6] "score"      "strand"     "phase"      "attributes"</code></pre>
+</div>
+</div>
+<p>We can also check the row names, but typically a dataframe only has numbers as the row names</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(gff) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "1" "2" "3" "4" "5" "6"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the %&gt;% head() shows the first few results, since there's a lot of rows here. It's another way to write:</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># head(row.names(gff))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For character columns, it’s useful to see the unique characters. For example, if we can to see what are the different <code>type</code> in <code>gff</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(gff<span class="sc">$</span>type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "region"                    "pseudogene"               
+ [3] "pseudogenic_transcript"    "exon"                     
+ [5] "transposable_element_gene" "transposable_element"     
+ [7] "gene"                      "mRNA"                     
+ [9] "three_prime_UTR"           "CDS"                      
+[11] "five_prime_UTR"            "ncRNA_gene"               
+[13] "ncRNA"                     "snoRNA"                   
+[15] "pre_miRNA"                 "miRNA"                    
+[17] "snRNA"                     "tRNA"                     
+[19] "rRNA"                     </code></pre>
+</div>
+</div>
+<p>We see that the annotation file include many types of genomic elements.</p>
+<p>Try to write a code to get the unique value of <code>strand</code>:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(gff<span class="sc">$</span>strand)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "." "+" "-"</code></pre>
+</div>
+</div>
+</section>
+<section id="call-rows-and-columns" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Call rows and columns</h1>
+<p>Data frames are table, and you can extract data from each rows and columns.</p>
+<p>We can do this based on the row/col numbers, which starts from 1 in R.</p>
+<p>The convention is <code>dataframe[row, col]</code></p>
+<p>Get the first row:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>gff[<span class="dv">1</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  seqid   source   type start      end score strand phase
+1    2L BDGP6.32 region     1 23513712     .      .     .
+                                                          attributes
+1 ID=region:2L;Alias=AE014134,NT_033779,AE014134.6,NT_033779.5,chr2L</code></pre>
+</div>
+</div>
+<p>Get the first column</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>gff[,<span class="dv">1</span>]</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the results are too long to be show here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Using the same format, we can extract, for example, a cell in the third row and the third column</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>gff[<span class="dv">3</span>,<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "pseudogenic_transcript"</code></pre>
+</div>
+</div>
+<p>We can even extract a few rows/columns at the same time using the vector <code>c().</code></p>
+<p>For example, to get the first two rows in the third column:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>gff[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "region"     "pseudogene"</code></pre>
+</div>
+</div>
+<p>Write a code to extract the cells in the 10th row and the 4th and 5th column:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>gff[<span class="dv">10</span>, <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   start   end
+10  9839 18570</code></pre>
+</div>
+</div>
+<p>In many case, you know the column names and it’s more logical to call columns by the column names, following the same convention but with “colname.</p>
+<p>Get the 100-105th row of the column “type””</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>gff[<span class="dv">100</span><span class="sc">:</span><span class="dv">105</span>, <span class="st">"type"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "exon" "CDS"  "exon" "CDS"  "exon" "CDS" </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Not that 100:105 is the same as c(100, 101, 102, 103, 104, 105)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We have seen this before, but we can use the <code>$</code> sign if we are specifying just one column.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>gff<span class="sc">$</span>seqid  <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2L" "2L" "2L" "2L" "2L" "2L"</code></pre>
+</div>
+</div>
+</section>
+<section id="sort" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Sort</h1>
+<p>There are many ways to sort, but it is easier to use functions in tidyr</p>
+<p>For example to sort gff by <code>start</code> in ascending order:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(gff, start)  <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  seqid   source   type start      end score strand phase
+1    2L BDGP6.32 region     1 23513712     .      .     .
+2    2R BDGP6.32 region     1 25286936     .      .     .
+3    3L BDGP6.32 region     1 28110227     .      .     .
+4    3R BDGP6.32 region     1 32079331     .      .     .
+5     4 BDGP6.32 region     1  1348131     .      .     .
+6     X BDGP6.32 region     1 23542271     .      .     .
+                                                          attributes
+1 ID=region:2L;Alias=AE014134,NT_033779,AE014134.6,NT_033779.5,chr2L
+2 ID=region:2R;Alias=AE013599,NT_033778,AE013599.5,NT_033778.4,chr2R
+3 ID=region:3L;Alias=AE014296,NT_037436,AE014296.5,NT_037436.4,chr3L
+4 ID=region:3R;Alias=AE014297,NT_033777,AE014297.3,NT_033777.3,chr3R
+5   ID=region:4;Alias=AE014135,NC_004353,AE014135.4,NC_004353.4,chr4
+6   ID=region:X;Alias=AE014298,NC_004354,AE014298.5,NC_004354.4,chrX</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for the descending order: arrange(gff, desc(start)) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can also sort by two columns by adding another argument in <code>arrange()</code>.</p>
+<p>To sort first by <code>start</code> ascendingly, then by <code>end</code> descendingly:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(gff, start, <span class="fu">desc</span>(end))  <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  seqid   source   type start      end score strand phase
+1    3R BDGP6.32 region     1 32079331     .      .     .
+2    3L BDGP6.32 region     1 28110227     .      .     .
+3    2R BDGP6.32 region     1 25286936     .      .     .
+4     X BDGP6.32 region     1 23542271     .      .     .
+5    2L BDGP6.32 region     1 23513712     .      .     .
+6     Y BDGP6.32 region     1  3667352     .      .     .
+                                                          attributes
+1 ID=region:3R;Alias=AE014297,NT_033777,AE014297.3,NT_033777.3,chr3R
+2 ID=region:3L;Alias=AE014296,NT_037436,AE014296.5,NT_037436.4,chr3L
+3 ID=region:2R;Alias=AE013599,NT_033778,AE013599.5,NT_033778.4,chr2R
+4   ID=region:X;Alias=AE014298,NC_004354,AE014298.5,NC_004354.4,chrX
+5 ID=region:2L;Alias=AE014134,NT_033779,AE014134.6,NT_033779.5,chr2L
+6   ID=region:Y;Alias=CP007106,NC_024512,CP007106.1,NC_024512.1,chrY</code></pre>
+</div>
+</div>
+</section>
+<section id="subset" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Subset</h1>
+<p>Often time, you only want to keep some rows of a dataframe only when a column has certain value.</p>
+<p>For example, in <code>gff</code> , there are many <code>type</code>, but when we do only want to the data where <code>type</code> is <code>gene</code>, we will be subsetting the dataframe:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(gff, type<span class="sc">==</span><span class="st">"gene"</span>) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  seqid  source type start   end score strand phase
+1    2L FlyBase gene  9839 21376     .      -     .
+2    2L FlyBase gene 21823 25155     .      -     .
+3    2L FlyBase gene 25402 65404     .      -     .
+4    2L FlyBase gene 66482 71390     .      +     .
+5    2L FlyBase gene 71757 76211     .      +     .
+6    2L FlyBase gene 76348 77783     .      +     .
+                                                                                                                                       attributes
+1 ID=gene:FBgn0002121;Name=l(2)gl;biotype=protein_coding;description=lethal (2) giant larvae;gene_id=FBgn0002121;logic_name=refseq_import_visible
+2  ID=gene:FBgn0031209;Name=Ir21a;biotype=protein_coding;description=Ionotropic receptor 21a;gene_id=FBgn0031209;logic_name=refseq_import_visible
+3 ID=gene:FBgn0051973;Name=Cda5;biotype=protein_coding;description=Chitin deacetylase-like 5;gene_id=FBgn0051973;logic_name=refseq_import_visible
+4                      ID=gene:FBgn0067779;Name=dbr;biotype=protein_coding;description=debra;gene_id=FBgn0067779;logic_name=refseq_import_visible
+5              ID=gene:FBgn0031213;Name=galectin;biotype=protein_coding;description=galectin;gene_id=FBgn0031213;logic_name=refseq_import_visible
+6                                    ID=gene:FBgn0031214;Name=CG11374;biotype=protein_coding;gene_id=FBgn0031214;logic_name=refseq_import_visible</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The code below also work.</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># subset(gff, type=="")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Write a code to subset <code>gff</code> when <code>source</code> is <code>BDGP6.32</code></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(gff, source<span class="sc">==</span><span class="st">"BDGP6.32"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 seqid   source   type start      end score strand phase
+1                   2L BDGP6.32 region     1 23513712     .      .     .
+2                   2R BDGP6.32 region     1 25286936     .      .     .
+3                   3L BDGP6.32 region     1 28110227     .      .     .
+4                   3R BDGP6.32 region     1 32079331     .      .     .
+5                    4 BDGP6.32 region     1  1348131     .      .     .
+6                    X BDGP6.32 region     1 23542271     .      .     .
+7                    Y BDGP6.32 region     1  3667352     .      .     .
+8 mitochondrion_genome BDGP6.32 region     1    19524     .      .     .
+                                                                                  attributes
+1                         ID=region:2L;Alias=AE014134,NT_033779,AE014134.6,NT_033779.5,chr2L
+2                         ID=region:2R;Alias=AE013599,NT_033778,AE013599.5,NT_033778.4,chr2R
+3                         ID=region:3L;Alias=AE014296,NT_037436,AE014296.5,NT_037436.4,chr3L
+4                         ID=region:3R;Alias=AE014297,NT_033777,AE014297.3,NT_033777.3,chr3R
+5                           ID=region:4;Alias=AE014135,NC_004353,AE014135.4,NC_004353.4,chr4
+6                           ID=region:X;Alias=AE014298,NC_004354,AE014298.5,NC_004354.4,chrX
+7                           ID=region:Y;Alias=CP007106,NC_024512,CP007106.1,NC_024512.1,chrY
+8 ID=region:mitochondrion_genome;Alias=KJ947872,KJ947872.2,NC_024511.2,chrM;Is_circular=true</code></pre>
+</div>
+</div>
+<p>You can subset based on numeric column.</p>
+<p>For example keep only when start &lt;200 and type is mRNA</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(gff, start<span class="sc">&lt;</span><span class="dv">300</span>, type<span class="sc">==</span><span class="st">"mRNA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 seqid  source type start  end score strand phase
+1 mitochondrion_genome FlyBase mRNA   240 1263     .      +     .
+                                                                                                                               attributes
+1 ID=transcript:FBtr0100857;Parent=gene:FBgn0013680;Name=mt:ND2-RA;biotype=protein_coding;tag=Ensembl_canonical;transcript_id=FBtr0100857</code></pre>
+</div>
+</div>
+<p>The above example subset when both conditions apply.</p>
+<p>You can also subset when <em>either</em> conditions apply:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(gff, start<span class="sc">==</span><span class="dv">7529</span> <span class="sc">|</span> end <span class="sc">==</span><span class="dv">9484</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  seqid  source                   type start  end score strand phase
+1    2L FlyBase             pseudogene  7529 9484     .      +     .
+2    2L FlyBase pseudogenic_transcript  7529 9484     .      +     .
+3    2L FlyBase                   exon  7529 8116     .      +     .
+4    2L FlyBase                   exon  8193 9484     .      +     .
+                                                                                                                            attributes
+1                             ID=gene:FBgn0031208;Name=CR11023;biotype=pseudogene;gene_id=FBgn0031208;logic_name=refseq_import_visible
+2 ID=transcript:FBtr0475186;Parent=gene:FBgn0031208;Name=CR11023-RE;biotype=pseudogene;tag=Ensembl_canonical;transcript_id=FBtr0475186
+3 Parent=transcript:FBtr0475186;Name=FBtr0475186-E1;constitutive=1;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=FBtr0475186-E1;rank=1
+4 Parent=transcript:FBtr0475186;Name=FBtr0475186-E2;constitutive=1;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=FBtr0475186-E2;rank=2</code></pre>
+</div>
+</div>
+</section>
+<section id="new-column" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> New column</h1>
+<p>We can create new column based on existing column.</p>
+<p>For example to get the length of all elements by the start and end:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(gff, <span class="at">length =</span> <span class="fu">abs</span>(end <span class="sc">-</span> start)<span class="sc">+</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  seqid   source                      type start      end score strand phase
+1    2L BDGP6.32                    region     1 23513712     .      .     .
+2    2L  FlyBase                pseudogene  7529     9484     .      +     .
+3    2L  FlyBase    pseudogenic_transcript  7529     9484     .      +     .
+4    2L  FlyBase                      exon  7529     8116     .      +     .
+5    2L  FlyBase                      exon  8193     9484     .      +     .
+6    2L  FlyBase transposable_element_gene  9726     9859     .      +     .
+                                                                                                                            attributes
+1                                                                   ID=region:2L;Alias=AE014134,NT_033779,AE014134.6,NT_033779.5,chr2L
+2                             ID=gene:FBgn0031208;Name=CR11023;biotype=pseudogene;gene_id=FBgn0031208;logic_name=refseq_import_visible
+3 ID=transcript:FBtr0475186;Parent=gene:FBgn0031208;Name=CR11023-RE;biotype=pseudogene;tag=Ensembl_canonical;transcript_id=FBtr0475186
+4 Parent=transcript:FBtr0475186;Name=FBtr0475186-E1;constitutive=1;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=FBtr0475186-E1;rank=1
+5 Parent=transcript:FBtr0475186;Name=FBtr0475186-E2;constitutive=1;ensembl_end_phase=-1;ensembl_phase=-1;exon_id=FBtr0475186-E2;rank=2
+6                                ID=gene:FBti0060580;biotype=transposable_element;gene_id=FBti0060580;logic_name=refseq_import_visible
+    length
+1 23513712
+2     1956
+3     1956
+4      588
+5     1292
+6      134</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that this function export a new dataframe.</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="co"># If you want to save this object you have to add </span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co"># gff = </span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co"># before the code.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="combine-data-frames" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Combine data frames</h1>
+<p>Sometimes, you may need to combine two sets of data. Each data may have columns that share some identifier.</p>
+<p>We will make up some data to illustrate (and show how to make a dataframe):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's say we have data from two classes of students and their grades</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>class1 <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">student =</span> <span class="fu">c</span>( <span class="st">"Denzel"</span>, <span class="st">"Claire"</span>, <span class="st">"Jack"</span>,<span class="st">"Quisha"</span>, <span class="st">"Carlos"</span>, <span class="st">"Julio"</span>,  <span class="st">"Hiromi"</span>, <span class="st">"Jiang"</span>,  <span class="st">"Isha"</span> ), <span class="at">grade =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">9</span>))</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>class2 <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">student =</span> <span class="fu">c</span>( <span class="st">"Denzel"</span>, <span class="st">"Jack"</span>,<span class="st">"Quisha"</span>, <span class="st">"Carlos"</span>, <span class="st">"Julio"</span>), <span class="at">grade =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>class1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  student grade
+1  Denzel    41
+2  Claire    80
+3    Jack    73
+4  Quisha    34
+5  Carlos     9
+6   Julio    99
+7  Hiromi    32
+8   Jiang    79
+9    Isha     2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>class2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  student grade
+1  Denzel    65
+2    Jack    13
+3  Quisha    48
+4  Carlos    64
+5   Julio    15</code></pre>
+</div>
+</div>
+<p>We make want to get the average grade of students that are in both classes.</p>
+<p>To do that, we can first combine the two dataframes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>class1n2 <span class="ot">=</span> <span class="fu">left_join</span>(<span class="at">x =</span> class2, <span class="at">y =</span> class1, <span class="at">by =</span> <span class="st">"student"</span>)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="co"># left_join keeps rows in x</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="co"># while right_join keeps rows in y</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co"># so we can also do</span></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="co"># right_join(class1, class2, "student")</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>class1n2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  student grade.x grade.y
+1  Denzel      65      41
+2    Jack      13      73
+3  Quisha      48      34
+4  Carlos      64       9
+5   Julio      15      99</code></pre>
+</div>
+</div>
+<p>Then we can make a new column to calculate the average grade:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(class1n2, <span class="at">avg_grade =</span> (grade.x <span class="sc">+</span> grade.y)<span class="sc">/</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  student grade.x grade.y avg_grade
+1  Denzel      65      41      53.0
+2    Jack      13      73      43.0
+3  Quisha      48      34      41.0
+4  Carlos      64       9      36.5
+5   Julio      15      99      57.0</code></pre>
+</div>
+</div>
+</section>
+<section id="assignment" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Assignment</h1>
+<p>To practice the skills above and last week, we will test whether the length of the 3’ and 5’ UTRs are different in <em>D. melanogaster</em>.</p>
+<p>Write your codes with clear annotations using <code>#</code> to do the following. Run your set of scripts in the R console and submit the codes and output as an assignment (you can copy and paste it over).</p>
+<p>Your submission should look something like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Check col names</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(gff)</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "seqid"      "source"     "type"       "start"      "end"       </span></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [6] "score"      "strand"     "phase"      "attributes"</span></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Check unique values of type</span></span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(gff<span class="sc">$</span>type)</span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] "region"                    "pseudogene"               </span></span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  [3] "pseudogenic_transcript"    "exon"                     </span></span>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  [5] "transposable_element_gene" "transposable_element"     </span></span>
+<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  [7] "gene"                      "mRNA"                     </span></span>
+<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  [9] "three_prime_UTR"           "CDS"                      </span></span>
+<span id="cb58-14"><a href="#cb58-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [11] "five_prime_UTR"            "ncRNA_gene"               </span></span>
+<span id="cb58-15"><a href="#cb58-15" aria-hidden="true" tabindex="-1"></a><span class="do">## [13] "ncRNA"                     "snoRNA"                   </span></span>
+<span id="cb58-16"><a href="#cb58-16" aria-hidden="true" tabindex="-1"></a><span class="do">## [15] "pre_miRNA"                 "miRNA"                    </span></span>
+<span id="cb58-17"><a href="#cb58-17" aria-hidden="true" tabindex="-1"></a><span class="do">## [17] "snRNA"                     "tRNA"                     </span></span>
+<span id="cb58-18"><a href="#cb58-18" aria-hidden="true" tabindex="-1"></a><span class="do">## [19] "rRNA"</span></span>
+<span id="cb58-19"><a href="#cb58-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-20"><a href="#cb58-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. do anova</span></span>
+<span id="cb58-21"><a href="#cb58-21" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">aov</span>(start<span class="sc">~</span>type, gff))</span>
+<span id="cb58-22"><a href="#cb58-22" aria-hidden="true" tabindex="-1"></a><span class="do">##                 Df    Sum Sq   Mean Sq F value Pr(&gt;F)    </span></span>
+<span id="cb58-23"><a href="#cb58-23" aria-hidden="true" tabindex="-1"></a><span class="do">## type            18 1.588e+16 8.824e+14   15.29 &lt;2e-16 ***</span></span>
+<span id="cb58-24"><a href="#cb58-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals   503261 2.905e+19 5.773e+13                   </span></span>
+<span id="cb58-25"><a href="#cb58-25" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb58-26"><a href="#cb58-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+
+</div>
+<ol type="1">
+<li><p>Subset <code>gff</code> into a new object called <code>gff_utr</code> based on either <code>type==five_prime_UTR</code> or <code>type==three_prime_UTR</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check your data</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(gff_utr)<span class="sc">==</span><span class="dv">80246</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This should return TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li><p>Make a new column called <code>length</code> based on the absolute value of <code>end - start</code> + 1</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check your data</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(gff_utr<span class="sc">$</span>length)<span class="sc">==</span><span class="dv">27656385</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This should return TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li><p>Make another new column called <code>log_length</code> based on log10(length).</p></li>
+<li><p>Test whether the <code>log_length</code> of <code>five_prime_UTR</code> and <code>five_prime_UTR</code> are different using the <code>t.test()</code>. Write a summary statement after your # in your code.</p></li>
+<li><p>Plot the <code>log_length</code> against <code>type</code> using a boxplot. DO NOT overlay points with geom_point().</p></li>
+</ol>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
