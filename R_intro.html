@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Solomon Chak">
-<meta name="dcterms.date" content="2023-02-27">
+<meta name="dcterms.date" content="2023-03-06">
 
 <title>R Intro</title>
 <style>
@@ -166,7 +166,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 27, 2023</p>
+      <p class="date">March 6, 2023</p>
     </div>
   </div>
   
@@ -540,8 +540,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="linear-regression" class="level3">
 <h3 class="anchored" data-anchor-id="linear-regression">5.1 Linear regression</h3>
 <p>Linear regression tests the relationship between two continuous variables. The analysis can estimate the a regression line that best fit the data using the least squares method (see <a href="https://www.jmp.com/en_us/statistics-knowledge-portal/what-is-regression/the-method-of-least-squares.html">here</a>). It also estimates the slope and intercept of the linear regression line and allows testing whether they are significantly different from zero.</p>
-<p>In R the <code>lm</code> function can fit a number linear models, including linear regression.</p>
-<p>To estimate the linear model to predict Height_ft (the response or dependent variable) by Age (the predictor or independent variable):</p>
+<p>In R the <code>lm</code> function can fit a number of linear models, including linear regression.</p>
+<p>The code below creates a linear model (lm_HA) to predict Height_ft (the response or dependent variable) by Age (the predictor or independent variable):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>lm_HA <span class="ot">=</span> <span class="fu">lm</span>(<span class="at">formula =</span> Height_ft <span class="sc">~</span> Age, <span class="at">data =</span> data_name)</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>lm_HA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -555,7 +555,7 @@ Coefficients:
      1.6538       0.1566  </code></pre>
 </div>
 </div>
-<p>The output of the linear model shows the coefficients intercept and slope (under “Age”). But we can get much more out of <code>lm_HA</code> using <code>summary()</code>.</p>
+<p>Calling <code>lm_HA</code> shows the coefficients for intercept and slope (under “Age”). But we can get much more out of <code>lm_HA</code> using <code>summary()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_HA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -582,28 +582,31 @@ F-statistic: 8.026 on 1 and 7 DF,  p-value: 0.0253</code></pre>
 <p>Under “Coefficients”, it shows a t-test of whether the intercept and slope (Age) is significantly different from zero.</p>
 <p>In the last three lines, it shows:</p>
 <ul>
-<li><p>Residual standard error: lower means better fit</p></li>
-<li><p>Degrees of freedom: the maximum number of logically independent values</p></li>
-<li><p>Multiple R-squared: the percentage of the response variable variation that a the model explains</p></li>
-<li><p>Adjusted R-squared: adjusted for the number of terms in the model</p></li>
+<li><p>Residual standard error: lower values suggest better fit (i.e., less distance between the data point and the predicted line).</p></li>
+<li><p>Degrees of freedom: the maximum number of logically independent values.</p></li>
+<li><p>Multiple R-squared: the percentage of the response variable variation that a the model explains.</p></li>
+<li><p>Adjusted R-squared: R-squared adjusted for the number of terms in the model. Use this to compare between models with different number of predictor variables.</p></li>
 <li><p>Statistics of a F-test that evaluates the fit of the model.</p></li>
 </ul>
 <p>Although the F-test is at the end, it should be examined first to determine whether the linear model fits the data. Only when the model is well fitted, should you further interpret the significance of the intercept and slope.</p>
 <p>In this example, the linear regression is significant because the p-value of the F test is lower than 0.05 (p = 0.0253), so we can continue to examine the intercept and slope.</p>
-<p>The slope is 0.35657 (under “Estimate” in “Coefficient”) and the t-test indicate that it is significantly different from zero (p = 0.0253). Note that this p-value is the same when there is only one predictor variable. In multiple regression, there will be separate t-tests for each predictor variable.</p>
-<p>Therefore we can write this to summarize the result and provide the statistical support: There is a positive relationship between height and age (slope = 0.357, F = 8.026, d.f. = 1 and 7, p = 0.025).</p>
+<p>The slope is 0.35657 (under “Estimate” in “Coefficient”) and the t-test indicates that it is significantly different from zero (p = 0.0253). Note that this p-value is the same as that of the F-test only when there is one predictor variable. In multiple regression, there will be separate t-tests for each predictor variable.</p>
+<p>Therefore we can write a statement to summarize the result and provide the statistical support:</p>
+<blockquote class="blockquote">
+<p><strong>There is a positive relationship between height and age (slope = 0.357, F = 8.026, d.f. = 1 and 7, p = 0.025).</strong></p>
+</blockquote>
 <p><strong>Visualization</strong></p>
 <p>Visualization for linear regression is shown above in <a href="#scatter-plot-with-a-linear-fit">3.2 Scatter Plot with a Linear Fit</a>.</p>
 </section>
 <section id="t-test" class="level3">
 <h3 class="anchored" data-anchor-id="t-test">5.2 T-test</h3>
-<p>A two sample T-test compares the means of two samples. The predictor (independent) variable is nominal and has two categories. The response (dependent) variable is continuous. In other words, a two sample t-test tests whether the two categories of the predictor variable affect the continuous response variable.</p>
+<p>A two sample t-test compares the means of two samples. The predictor (independent) variable is nominal and has two categories (i.e., binomial). The response (dependent) variable is continuous. In other words, a two sample t-test tests whether the binomial predictor affects the continuous response variable.</p>
 <p>We will create a new variable called Age_group: A when Age &lt;= 25 and B when Age &gt; 25.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>data_name<span class="sc">$</span>Age_group <span class="ot">&lt;-</span> <span class="fu">with</span>(data_name, <span class="fu">ifelse</span>(Age <span class="sc">&lt;=</span> <span class="dv">25</span>, <span class="st">"A"</span>, <span class="st">"B"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can <code>View(data_name)</code> to check that we now have a new column in <code>data_name</code>.</p>
-<p>To test whether Height_ft is different between Age_group A and B, or whether Age_group affect Hr\eight_ft, we can use:</p>
+<p>To test whether Height_ft is different between Age_group A and B, in other word, whether Age_group affect Height_ft, we can use <code>t.test()</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Height_ft<span class="sc">~</span>Age_group, <span class="at">data =</span> data_name, <span class="at">alternative =</span> <span class="st">"two.sided"</span>, <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -633,7 +636,7 @@ mean in group A mean in group B
 <p><img src="R_intro_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>You can even overlap your datapoints on top of the boxplot:</p>
+<p>You can even overlap your datapoints on top of the boxplot using <code>geom_point()</code> or <code>geom_jitter()</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_name, <span class="fu">aes</span>(<span class="at">x =</span> Age_group, <span class="at">y =</span> Height_ft)) <span class="sc">+</span> </span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
@@ -647,7 +650,7 @@ mean in group A mean in group B
 <section id="anova" class="level3">
 <h3 class="anchored" data-anchor-id="anova">5.3 ANOVA</h3>
 <p>Analysis of variance (ANOVA) is used similar to the t-test, but when the predictor variable has three or more categories.</p>
-<p>To test whether Academic_standing affects Age:</p>
+<p>To test whether Academic_standing affects Age, we will build the model using <code>aov()</code>, then use <code>summary()</code> to show the full results:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>anova_model <span class="ot">=</span> <span class="fu">aov</span>(<span class="at">formula =</span> Age <span class="sc">~</span> Academic_standing, <span class="at">data =</span> data_name)</span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -657,8 +660,10 @@ Academic_standing  3  27.06   9.019   0.534  0.679
 Residuals          5  84.50  16.900               </code></pre>
 </div>
 </div>
+<p>Note that the results is similar to the F-test in the last part of regression, because ANOVA and regression are both linear models. But in ANOVA, we don’t have predictions of slope and intercepts.</p>
+<p>In this case, since the p-value is &lt;0.05, Academic_standing does not significantly affect Age.</p>
 <p><strong>Visualization</strong></p>
-<p>Similar to the t-test, we can plot the data used for ANOVA:</p>
+<p>Similar to the t-test, we can plot the data used for ANOVA using a boxplot:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_name, <span class="fu">aes</span>(<span class="at">x =</span> Academic_standing, <span class="at">y =</span> Age)) <span class="sc">+</span> </span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
@@ -668,12 +673,15 @@ Residuals          5  84.50  16.900               </code></pre>
 <p><img src="R_intro_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Note that showing the data points gives a more complete representation of our data. If you see only boxplot, you could imagine having a lot of data. But in fact, there are only 2-3 data point for each predictor variable. Some of them are even laying quite far apart from each other.</p>
+<p>Note that showing the data points gives a more complete representation of our data. If you see only the boxplot, you could imagine having a lot of data. But in fact, there are only 2-3 data point for each predictor variable. Some of them are even laying quite far apart from each other.</p>
 </section>
 <section id="chi-square---goodness-of-fit-test" class="level3">
 <h3 class="anchored" data-anchor-id="chi-square---goodness-of-fit-test">5.4 Chi-square - Goodness of Fit test</h3>
-<p>There are two types of Chi-Square tests, which are used when both the predictor and response variables are nominal.</p>
-<p>The goodness of fit Chi-square test is used to test whether the observed result (i.e.&nbsp;collected during an experiment) is significantly different than the “expected” result.</p>
+<p>There are two types of Chi-Square tests, which are used for categorical response (e.g., eye color, location, etc.)</p>
+<p>The goodness of fit Chi-square test is used to test whether the distribution of a categorical variable is significantly different than a “expected” distribution. There is no predictor in this case.</p>
+<blockquote class="blockquote">
+<p>For example, in a population of fish, we may count the number of female and male individuals. We may expect the sex ratio to be 1:1 and we can test it with the chi-square goodness of fit test.</p>
+</blockquote>
 <p>For example, let’s first generate a count of <code>Age_group</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>obs_age_group <span class="ot">=</span> <span class="fu">table</span>(data_name[,<span class="st">"Age_group"</span>])</span>
@@ -684,7 +692,7 @@ A B
 4 5 </code></pre>
 </div>
 </div>
-<p>We can then test whether the observed distribution of <code>Age_group</code> is equally distributed among the two groups (i.e., 1:1) uisng <code>chisq.test()</code>.</p>
+<p>We can then test whether the observed distribution of <code>Age_group</code> is equally distributed among the two groups (i.e., 1:1) using <code>chisq.test()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="at">x =</span> obs_age_group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -699,8 +707,8 @@ data:  obs_age_group
 X-squared = 0.11111, df = 1, p-value = 0.7389</code></pre>
 </div>
 </div>
-<p>Again, the null hypothesis is that the groups are equally distributed. The p-value is &gt; 0.05, which means that we have failed to reject the null hypothesis. Therefore, our observed distribution of Age_group is not significnatly different from 1:1.</p>
-<p>If there is a priori reason that the distribution should be, for example, 3:1, we can modify the code to test this:</p>
+<p>The null hypothesis of the test is that the groups are equally distributed. The p-value is &gt; 0.05, which means that we have failed to reject the null hypothesis. Therefore, our observed distribution of Age_group is not significantly different from 1:1.</p>
+<p>If there is an a priori reason that the distribution should be, for example, 3:1, we can modify the code to test this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="at">x =</span> obs_age_group, <span class="at">p =</span> <span class="fu">c</span>(<span class="dv">3</span><span class="sc">/</span><span class="dv">4</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -719,34 +727,48 @@ X-squared = 4.4815, df = 1, p-value = 0.03426</code></pre>
 <p><strong>Visualization</strong></p>
 <p>You can plot the data for a goodness of fit Chi-square test by using the raw data in <code>data_name</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_name, <span class="fu">aes</span>(<span class="at">x =</span> Age_group)) <span class="sc">+</span> <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Age group"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_name, <span class="fu">aes</span>(<span class="at">x =</span> Age_group)) <span class="sc">+</span> </span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Age group"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="R_intro_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Alternative, you could also plot is using the count data <code>obs_age_group</code>after converting it to a dataframe:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(obs_age_group), <span class="fu">aes</span>(Var1, Freq)) <span class="sc">+</span> </span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span> </span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Age group"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="R_intro_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
 <section id="chi-square---contingency-test" class="level3">
 <h3 class="anchored" data-anchor-id="chi-square---contingency-test">5.5 Chi-square - Contingency test</h3>
-<p>The Contingency test (or the Test of Independence), tests if the difference between two groups (e.g., Age_group) is significantly different depending on (contingent on) another variable (e.g., Academic_standing). Or, put another way, you might want to determine if the frequency of outcomes for one set of observations matches those for another set of observations.</p>
+<p>The Contingency test (or the test of Independence) examine if the distribution of a categorical variable (e.g., Age_group) is significantly different depending on (contingent on) another categorical variable (e.g., Academic_standing). Or, put another way, you might want to determine if the frequency of outcomes for one set of observations matches those for another set of observations.</p>
+<blockquote class="blockquote">
+<p>Using the sex ratio example above, we could sample the number of female and male in two populations of fish, one with high predation pressure and one with low predation pressure. You may want to compare whether predation pressure affect the sex ratio. In this case, the predictor variable, predation pressure, is categorical. The response variable, sex, is also categorical. The test to use analysis this is the chi-square contingency test.</p>
+</blockquote>
 <p>We will first reshape our data into a contingency table:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">=</span>  <span class="fu">melt</span>(data_name, <span class="at">measure.vars =</span> <span class="st">"Height_ft"</span>, <span class="at">id.vars =</span> <span class="fu">c</span>(<span class="st">"Age_group"</span>, <span class="st">"Academic_standing"</span>))</span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>obs_table <span class="ot">=</span> <span class="fu">cast</span>(temp, Age_group<span class="sc">~</span>Academic_standing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">=</span>  <span class="fu">melt</span>(data_name, <span class="at">measure.vars =</span> <span class="st">"Height_ft"</span>, <span class="at">id.vars =</span> <span class="fu">c</span>(<span class="st">"Age_group"</span>, <span class="st">"Academic_standing"</span>))</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>obs_table <span class="ot">=</span> <span class="fu">cast</span>(temp, Age_group<span class="sc">~</span>Academic_standing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Aggregation requires fun.aggregate: length used as default</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(temp)</span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>obs_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(temp) <span class="co"># remove temp because we're done with it</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>obs_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Age_group First-year Sophomore Junior Senior
 1         A          1         1      1      1
 2         B          1         2      1      1</code></pre>
 </div>
 </div>
+<p>The table above shows that, like in <a href="#chi-square---goodness-of-fit-test">5.4 Chi-square - Goodness of Fit test</a> we have the number of counts in Age_group A and B, but now from each category of Academic_standing.</p>
 <p>We can then test the null hypothesis that the two variables <code>Age_group</code> and <code>Academic_standing</code> are independent.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(obs_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(obs_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in chisq.test(obs_table): Chi-squared approximation may be incorrect</code></pre>
 </div>
@@ -758,14 +780,14 @@ data:  obs_table
 X-squared = 0.225, df = 3, p-value = 0.9735</code></pre>
 </div>
 </div>
-<p>The p-value is &gt; 0.05. So we have failed to reject the null hypothesis. Hence the two variable are independent. In other words the distribution of <code>Age_group</code> is not dependent or affected by <code>Academic_standing</code>.</p>
+<p>The p-value is &gt; 0.05. So we have failed to reject the null hypothesis. Hence the two variable are independent. In other words, <code>Academic_standing</code> does not affect the distribution of <code>Age_group</code>.</p>
 <p><strong>Visualization</strong></p>
-<p>You can plot the contingency table by:</p>
+<p>You can plot the contingency table by <code>geom_bar()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_name, <span class="fu">aes</span>(<span class="at">x =</span> Age_group)) <span class="sc">+</span> <span class="fu">geom_bar</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>Academic_standing) <span class="sc">+</span></span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Age group"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_name, <span class="fu">aes</span>(<span class="at">x =</span> Age_group)) <span class="sc">+</span> <span class="fu">geom_bar</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>Academic_standing) <span class="sc">+</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Age group"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="R_intro_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="672"></p>
+<p><img src="R_intro_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
