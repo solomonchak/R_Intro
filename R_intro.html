@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Solomon Chak">
-<meta name="dcterms.date" content="2023-03-06">
+<meta name="dcterms.date" content="2023-04-05">
 
 <title>R Intro</title>
 <style>
@@ -166,7 +166,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 6, 2023</p>
+      <p class="date">April 5, 2023</p>
     </div>
   </div>
   
@@ -756,25 +756,21 @@ X-squared = 4.4815, df = 1, p-value = 0.03426</code></pre>
 <blockquote class="blockquote">
 <p>Using the sex ratio example above, we could sample the number of female and male in two populations of fish, one with high predation pressure and one with low predation pressure. You may want to compare whether predation pressure affect the sex ratio. In this case, the predictor variable, predation pressure, is categorical. The response variable, sex, is also categorical. The analysis to use is the chi-square contingency test.</p>
 </blockquote>
-<p>Going back to our example student data in <code>data_name</code>. We will first reshape our data into a contingency table:</p>
+<p>Going back to our example student data in <code>data_name</code>. We will first reshape our data into a contingency table using <code>table()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">=</span>  <span class="fu">melt</span>(data_name, <span class="at">measure.vars =</span> <span class="st">"Height_ft"</span>, <span class="at">id.vars =</span> <span class="fu">c</span>(<span class="st">"Age_group"</span>, <span class="st">"Academic_standing"</span>))</span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>obs_table <span class="ot">=</span> <span class="fu">cast</span>(temp, Age_group<span class="sc">~</span>Academic_standing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Aggregation requires fun.aggregate: length used as default</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(temp) <span class="co"># remove temp because we're done with it</span></span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>obs_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>obs_table <span class="ot">=</span> <span class="fu">table</span>(data_name<span class="sc">$</span>Age_group, data_name<span class="sc">$</span>Academic_standing)</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>obs_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Age_group First-year Sophomore Junior Senior
-1         A          1         1      1      1
-2         B          1         2      1      1</code></pre>
+<pre><code>   
+    First-year Sophomore Junior Senior
+  A          1         1      1      1
+  B          1         2      1      1</code></pre>
 </div>
 </div>
 <p>The table above shows that, like in <a href="#chi-square---goodness-of-fit-test">5.4 Chi-square - Goodness of Fit test</a> we have the number of counts in Age_group A and B, but now from each category of Academic_standing.</p>
 <p>We can then test the null hypothesis that the two variables <code>Age_group</code> and <code>Academic_standing</code> are independent.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(obs_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(obs_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in chisq.test(obs_table): Chi-squared approximation may be incorrect</code></pre>
 </div>
@@ -790,8 +786,8 @@ X-squared = 0.225, df = 3, p-value = 0.9735</code></pre>
 <p><strong>Visualization</strong></p>
 <p>You can plot the contingency table by <code>geom_bar()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_name, <span class="fu">aes</span>(<span class="at">x =</span> Age_group)) <span class="sc">+</span> <span class="fu">geom_bar</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>Academic_standing) <span class="sc">+</span></span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Age group"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_name, <span class="fu">aes</span>(<span class="at">x =</span> Age_group)) <span class="sc">+</span> <span class="fu">geom_bar</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>Academic_standing) <span class="sc">+</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Age group"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="R_intro_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></p>
 </div>
