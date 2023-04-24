@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Solomon Chak">
+<meta name="dcterms.date" content="2023-04-24">
+
+<title>Bioinformatics Class Project Day 3</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="Project_Day3_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Project_Day3_files/libs/quarto-html/quarto.js"></script>
+<script src="Project_Day3_files/libs/quarto-html/popper.min.js"></script>
+<script src="Project_Day3_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Project_Day3_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Project_Day3_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Project_Day3_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Project_Day3_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Project_Day3_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Project_Day3_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="toc-section-number">1</span>  Introduction</a></li>
+  <li><a href="#load-libraries" id="toc-load-libraries" class="nav-link" data-scroll-target="#load-libraries"><span class="toc-section-number">2</span>  Load libraries</a></li>
+  <li><a href="#make-a-master-data-set" id="toc-make-a-master-data-set" class="nav-link" data-scroll-target="#make-a-master-data-set"><span class="toc-section-number">3</span>  Make a master data set</a></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion"><span class="toc-section-number">4</span>  Discussion</a></li>
+  <li><a href="#predictions" id="toc-predictions" class="nav-link" data-scroll-target="#predictions"><span class="toc-section-number">5</span>  Predictions</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Bioinformatics Class Project Day 3</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Solomon Chak </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 24, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1</span> Introduction</h2>
+<p>Last week, we set out to test the hypothesis that TEs are contributing to the evolution of the worker-queen differentiation in eusocial shrimp. We began with raw RNAseq data from three workers and three queens. I have assembled a transcriptome from the RNAseq data and ran Repeat Masker on the transcriptome assembly. We analyzed the raw RNAseq data with Galaxy to find the differential expressed genes and Finally, we loaded and explored two data sets in R:</p>
+<ul>
+<li><p><code>df</code> - List of transcripts that are SHARED in all individuals with results related to differential expression between queens and workers (mainly <code>log2FoldChange</code> and <code>padj</code>).</p></li>
+<li><p><code>df_transcript_te</code> - List of transposable elements (TEs) and their locations in the transcripts that has TEs.</p></li>
+</ul>
+<p>Our task today is to combine these data sets into a master data set and to decide what analyses can test whether the data support the hypothesis.</p>
+<hr>
+</section>
+<section id="load-libraries" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="load-libraries"><span class="header-section-number">2</span> Load libraries</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyr"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggpubr"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"stringr"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"plyr"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+
+</div>
+</section>
+<section id="make-a-master-data-set" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="make-a-master-data-set"><span class="header-section-number">3</span> Make a master data set</h2>
+<p>How do we combine <code>df</code> and <code>df_transcript_te</code>? Examine these files to see if there’s common column.</p>
+<p>Note that <code>df</code> has only transcripts that are mapped across all individuals, while <code>df_transcript_te</code> has only transcripts that have TEs. None of these files have ALL transcripts in the assembled transcriptome. But we do not need that information.</p>
+<p>Write some codes to combine <code>df</code> and <code>df_transcript_te</code> and save the it as <code>df_tranTE</code>. Look at the different ways to combine dataframes using dplyr <a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">here</a>, decide which one should be used.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This should return true if you did this correctly</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># nrow(df_tranTE) == nrow(df)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+
+</div>
+<hr>
+</section>
+<section id="discussion" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="discussion"><span class="header-section-number">4</span> Discussion</h2>
+<ol type="1">
+<li><p>If the hypothesis is true, what pattern would you expect to see in <code>df_tranTE</code>? These are your predictions/analysis.</p></li>
+<li><p>What are the predictor and response in each analysis?</p></li>
+<li><p>What statistic tests should be used for each analysis?</p></li>
+</ol>
+<hr>
+</section>
+<section id="predictions" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="predictions"><span class="header-section-number">5</span> Predictions</h2>
+<p>Below, we will run through a few example analysis using all TEs.</p>
+<ul>
+<li><p>You do not need to report Prediction 1 in your project report. Instead, I’ll provide a sample report based on Prediction 1.</p></li>
+<li><p>For Prediction 2 and Prediction 3, you will need to</p>
+<ul>
+<li><p>(1) report the main analysis here (with all TEs) and</p></li>
+<li><p>(2) modify the codes to run it for your assigned TE class and report it in the project report.</p>
+<div class="cell-output-display">
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">TE_class</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Akhila</td>
+<td style="text-align: left;">DNA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Diandra</td>
+<td style="text-align: left;">DNA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mohab</td>
+<td style="text-align: left;">LTR</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Rebeca</td>
+<td style="text-align: left;">LTR</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sanjna</td>
+<td style="text-align: left;">LINE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Steven</td>
+<td style="text-align: left;">LINE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tyla</td>
+<td style="text-align: left;">SINE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Solomon</td>
+<td style="text-align: left;">SINE</td>
+</tr>
+</tbody>
+</table>
+</div></li>
+</ul></li>
+</ul>
+<div class="callout-caution callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Prediction 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If TEs are contributing to the evolution of the worker-queen differentiation (our hypothesis), there would be more TEs in DE genes than non-DE genes.</p>
+<p>What are the predictor &amp; response variables?</p>
+<ul>
+<li><p>Predictor = DE (Y or N, categorical)</p></li>
+<li><p>Response = TE (Y or N, categorical)</p></li>
+</ul>
+<p>What statistic tests should be used?</p>
+<ul>
+<li>Chi-sq test of independence</li>
+</ul>
+<p>To do this, we will need to create two new columns <code>DE</code> and <code>TE</code> in <code>df_tranTE</code> that indicated whether the gene is DE or not, and has TE or not. We can use <code>mutate</code> in combination with <code>case_when</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_tranTE <span class="ot">=</span> <span class="fu">mutate</span>(df_tranTE, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">DE =</span> <span class="fu">case_when</span>(padj <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">~</span> <span class="st">'DE'</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                                  padj <span class="sc">&gt;=</span> <span class="fl">0.05</span> <span class="sc">~</span> <span class="st">'NS'</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">TE =</span> <span class="fu">case_when</span>(TE_class <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"DNA"</span>, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                                                  <span class="st">"LTR"</span>, </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                                                  <span class="st">"LINE"</span>, </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                                                  <span class="st">"SINE"</span>) <span class="sc">~</span> <span class="st">'TE'</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">.default =</span> <span class="st">'Not'</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                   )</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># In the second case_when(), when the TE_class is not the ones in c(), the cell will be assigned "Not"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then we can use <code>table</code> to make a <strong>contingency table</strong> that has the count of transcripts in all combinations of the columns <code>DE</code> and <code>TE</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>obs_table <span class="ot">=</span> <span class="fu">table</span>(df_tranTE<span class="sc">$</span>TE, df_tranTE<span class="sc">$</span>DE)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>obs_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     
+         DE    NS
+  Not   224 26108
+  TE     39  3462</code></pre>
+</div>
+</div>
+<div class="callout-note callout callout-style-simple no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<strong>Now write some codes to run the Chi-squared test of independence.</strong>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+
+</div>
+<p>Remember that for a chi-square test of independence, the null hypothesis is that the two variables (TE and DE) are independent. When p &lt; 0.05, we can reject the null hypothesis. When p &gt; 0.05, we fail to reject the null hypothesis.</p>
+<blockquote class="blockquote">
+<p>What does the test result tell you?</p>
+</blockquote>
+<div class="cell">
+
+</div>
+<p>Let’s plot this using the raw data <code>df_tranTE</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df_tranTE, <span class="fu">aes</span>(<span class="at">x =</span> TE, <span class="at">fill =</span> TE)) <span class="sc">+</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(DE<span class="sc">~</span>., <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Transposable Elements"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Project_Day3_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We can further test whether TE_class affect whether a transcript is DE or not.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="fu">with</span>(df_tranTE, <span class="fu">table</span>(TE_class, DE)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in chisq.test(with(df_tranTE, table(TE_class, DE))): Chi-squared
+approximation may be incorrect</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  with(df_tranTE, table(TE_class, DE))
+X-squared = 1.2042, df = 3, p-value = 0.752</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>What does this result tell you?</p>
+</blockquote>
+<hr>
+<section id="summary-statement" class="level3">
+<h3 class="anchored" data-anchor-id="summary-statement">Summary Statement</h3>
+<p>In summary we can say that (note the use of 3 significant figures in reporting stats.):</p>
+<blockquote class="blockquote">
+<p>The proportions of transcripts having TEs or not are not statistically different between transcripts that are and are not differentially expressed between queens and workers (Chi-squared = 2.160, d.f. = 1, p = 0.142). Further, whether a transcript is differentially expressed or not is not dependent on the major TE class (DNA, LTR, LINE, and SINE) (Chi-squared = 1.204, d.f. = 3, p = 0.752). These results do not support our hypothesis that TEs are contributing to the evolution of the worker-queen differentiation.</p>
+</blockquote>
+</section>
+</div>
+</div>
+</div>
+<hr>
+<div class="callout-caution callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Prediction 2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If the hypothesis is true (TEs are contributing to the evolution of the worker-queen differentiation), transcripts that has TE may be more strongly differentially expressed in queens.</p>
+<p>What are the predictor &amp; response variables?</p>
+<ul>
+<li><p>Predictor = TE (Y or N, categorical &amp; binomial)</p></li>
+<li><p>Response = log2FoldChange (continuous)</p>
+<ul>
+<li><p>Note that log2FoldChange can be -ve and +ve. If we use it as is, we will be testing whether transcripts with TE are more UP regulated. <strong>We are not doing that here.</strong></p></li>
+<li><p>Instead, we should use <code>log(abs(log2FoldChange))</code>, which tests whether transcripts with TE are differentially expressed REGARDLESS of being up/down regulated. The log transformation is used to normalize the data.</p></li>
+</ul></li>
+</ul>
+<p>What statistic tests should be used?</p>
+<ul>
+<li>t-test</li>
+</ul>
+<div class="callout-note callout callout-style-simple no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Write some codes to perform the t.test and plot the data.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The null hypothesis of a t-test is that the means of the two groups are not different. You can reject the null when p &lt; 0.05, but fail to reject the null when p &gt; 0.05. Use the reported means of the two group to interpret which group has higher means (or less negative). The difference between the two groups can also be seen in the plot.</p>
+<div class="cell">
+
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In your analysis, filter <code>df_tranTE</code> to have your assigned TE class <u><strong><em>OR</em></strong></u> <code>is.na(TE_class)</code> . Then rerun the t-test and plotting.</p>
+</div>
+</div>
+<div class="cell">
+
+</div>
+</div>
+</div>
+</div>
+<hr>
+<div class="callout-caution callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Prediction 3
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If the hypothesis is true (TEs are contributing to the evolution of the worker-queen differentiation), transcripts that has longer TE may be more strongly differentially expressed.</p>
+<p>What are the predictor &amp; response variables?</p>
+<ul>
+<li><p>Predictor = TE_length (continuous)</p>
+<ul>
+<li>Note that not all genes in <code>df_tranTE</code> has TE, so we’ll need to filter it to just rows with TEs.</li>
+<li>We should transform it with log(TE_length) to conform with normality.</li>
+</ul></li>
+<li><p>Response = log2FoldChange (continuous)</p>
+<ul>
+<li>Note again that log2FoldChange can be analyzed in two ways. We will use <code>log(abs(log2FoldChange))</code> here.</li>
+</ul></li>
+</ul>
+<p>What statistic tests should be used?</p>
+<ul>
+<li>Linear regression</li>
+</ul>
+<div class="callout-note callout callout-style-simple no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Write some codes to perform the filter and regression steps. And plot the data with a linear regression line (use linetype = “dashed” for non-significant results).
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+
+</div>
+<blockquote class="blockquote">
+<p>What does the result tell you?</p>
+</blockquote>
+<div class="cell">
+
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+For your analysis, filter <code>df_tranTE</code> to have your assigned TE class. Then do the regression and plotting.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<div class="cell">
+
+</div>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
