@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Tyla Perry">
+<meta name="dcterms.date" content="2023-05-09">
+
+<title>Project Report</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="Tyla Perry Project_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Tyla Perry Project_files/libs/quarto-html/quarto.js"></script>
+<script src="Tyla Perry Project_files/libs/quarto-html/popper.min.js"></script>
+<script src="Tyla Perry Project_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Tyla Perry Project_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Tyla Perry Project_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Tyla Perry Project_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Tyla Perry Project_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Tyla Perry Project_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Tyla Perry Project_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="toc-section-number">1</span>  Introduction</a>
+  <ul class="collapse">
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="toc-section-number">1.1</span>  </a></li>
+  <li><a href="#are-transcripts-that-have-te-more-strongly-differentially-expressed-in-queens" id="toc-are-transcripts-that-have-te-more-strongly-differentially-expressed-in-queens" class="nav-link" data-scroll-target="#are-transcripts-that-have-te-more-strongly-differentially-expressed-in-queens"><span class="toc-section-number">1.2</span>  <strong>Are transcripts that have TE more strongly differentially expressed in queens?</strong></a>
+  <ul class="collapse">
+  <li><a href="#we-further-investigated-if-te_class-sine-has-an-affect-on-te" id="toc-we-further-investigated-if-te_class-sine-has-an-affect-on-te" class="nav-link" data-scroll-target="#we-further-investigated-if-te_class-sine-has-an-affect-on-te">We further investigated if TE_class SINE has an affect on TE</a></li>
+  </ul></li>
+  <li><a href="#are-transcripts-with-longer-te-more-stongly-differentially-expressed" id="toc-are-transcripts-with-longer-te-more-stongly-differentially-expressed" class="nav-link" data-scroll-target="#are-transcripts-with-longer-te-more-stongly-differentially-expressed"><span class="toc-section-number">1.3</span>  Are transcripts with longer TE more stongly differentially expressed?</a>
+  <ul class="collapse">
+  <li><a href="#we-further-investigated-if-te_class-sine-has-an-affect-on-longer-tes" id="toc-we-further-investigated-if-te_class-sine-has-an-affect-on-longer-tes" class="nav-link" data-scroll-target="#we-further-investigated-if-te_class-sine-has-an-affect-on-longer-tes">We further investigated if TE_class SINE has an affect on longer TE’s</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="toc-section-number">2</span>  Conclusion</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Project Report</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Tyla Perry </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 9, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>See <a href="https://solomonchak.github.io/R_Intro/Project_Day1.html">here</a> for the background of the project.</p>
+<p>Here, we hypothesize that TEs are contributing to the differentiation between queens and workers in eusocial shrimps. It hypothesized that transcripts with more TE are strongly differentially expressed in queens. It was also hypothesized that transcripts with longer TE are more strongly expressed. When investigating different TE classes it was hypothesized that TE class SINE has an affect on longer TE’s</p>
+<section id="section" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="section"><span class="header-section-number">1.1</span> </h2>
+<div class="callout-important callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>We expect transcripts that have TE to be more strongly expressed. It is expected to see transcipts with longer TE more strongly expressed in worker-queens. When looking at TE class SINE it is expected to see longer TE’s in TE class SINE</p>
+<p>Apart from the contribution of all TEs, we will also test whether SINE has a significant contribution to worker-queen differentiation. Transposable components (TEs) possess close to half(46%), of the human genome, making the TE content of our genome one of the greatest among well evolved creatures.The only mobile elements in the human genome that have clear evidence of current retrotrans-positional activity are the autonomous long interspersed element-1 (LINE-1 or L1) and its non-autonomous partners, such as “SINER, VNTR, and Alu” (SVA) and the short interspersed element (SINE) Alu (Belancio et.,al 2009)</p>
+<table class="table">
+<tbody>
+<tr class="odd">
+<td>https://doi.org/10.1186/gm97</td>
+</tr>
+<tr class="even">
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyr"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggpubr"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"stringr"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"plyr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+</section>
+<section id="are-transcripts-that-have-te-more-strongly-differentially-expressed-in-queens" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="are-transcripts-that-have-te-more-strongly-differentially-expressed-in-queens"><span class="header-section-number">1.2</span> <strong>Are transcripts that have TE more strongly differentially expressed in queens?</strong></h2>
+<p>We preformed a t-test on the Y or N, categorical and binomial predictor TE against the continuos response variable log2FoldChange</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#t-test</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="fu">log</span>(<span class="fu">abs</span>(log2FoldChange))<span class="sc">~</span>TE, df_tranTE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  log(abs(log2FoldChange)) by TE
+t = -6.6975, df = 4541.1, p-value = 2.379e-11
+alternative hypothesis: true difference in means between group Not and group TE is not equal to 0
+95 percent confidence interval:
+ -0.1872263 -0.1024362
+sample estimates:
+mean in group Not  mean in group TE 
+       -0.7029916        -0.5581603 </code></pre>
+</div>
+</div>
+<p>It can be said based on the results that transcripts with TE have a higher log fold change. Since the p value is 2.379e-11 which is &lt;0.05 we can accept the null hypothesis.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a box plot</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_tranTE , <span class="fu">aes</span>(TE , <span class="fu">log</span>(<span class="fu">abs</span>(log2FoldChange)))) <span class="sc">+</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Tyla-Perry-Project_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="we-further-investigated-if-te_class-sine-has-an-affect-on-te" class="level3">
+<h3 class="anchored" data-anchor-id="we-further-investigated-if-te_class-sine-has-an-affect-on-te">We further investigated if TE_class SINE has an affect on TE</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#filter df_TranTE to have SINE OR is.na.(TE_class)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_tranTE_SINE<span class="ot">=</span><span class="fu">filter</span>(df_tranTE,TE_class<span class="sc">==</span><span class="st">"SINE"</span><span class="sc">|</span><span class="fu">is.na</span>(TE_class))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Preform a t-test based on the new dataframe</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="fu">log</span>(<span class="fu">abs</span>(log2FoldChange))<span class="sc">~</span>TE,df_tranTE_SINE )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  log(abs(log2FoldChange)) by TE
+t = 0.18889, df = 30.1, p-value = 0.8514
+alternative hypothesis: true difference in means between group Not and group TE is not equal to 0
+95 percent confidence interval:
+ -0.3443377  0.4145348
+sample estimates:
+mean in group Not  mean in group TE 
+       -0.7029916        -0.7380902 </code></pre>
+</div>
+</div>
+<p>It can be said based on the results that SINE has no affect on TE. Since the p value is 0.851 which is &gt;0.05 we can reject the null hypothesis</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot the data</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_tranTE_SINE , <span class="fu">aes</span>(TE , <span class="fu">log</span>(<span class="fu">abs</span>(log2FoldChange)))) <span class="sc">+</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Tyla-Perry-Project_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="are-transcripts-with-longer-te-more-stongly-differentially-expressed" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="are-transcripts-with-longer-te-more-stongly-differentially-expressed"><span class="header-section-number">1.3</span> Are transcripts with longer TE more stongly differentially expressed?</h2>
+<p>We prefomed a linear regression on continous predictor TE_length against the continuos response variable log2FoldChange</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#linear regression</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>lm_log<span class="ot">=</span><span class="fu">lm</span>(<span class="at">formula =</span><span class="fu">log</span>(TE_length)<span class="sc">~</span> <span class="fu">log</span>(<span class="fu">abs</span>(log2FoldChange)) , <span class="at">data =</span>df_tranTE )</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Preform a summary</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_log)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(TE_length) ~ log(abs(log2FoldChange)), data = df_tranTE)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.9795 -0.4413 -0.1231  0.3103  3.5771 
+
+Coefficients:
+                         Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)               4.37279    0.01388 314.942   &lt;2e-16 ***
+log(abs(log2FoldChange)) -0.00166    0.01051  -0.158    0.874    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7447 on 3499 degrees of freedom
+  (26332 observations deleted due to missingness)
+Multiple R-squared:  7.136e-06, Adjusted R-squared:  -0.0002787 
+F-statistic: 0.02497 on 1 and 3499 DF,  p-value: 0.8745</code></pre>
+</div>
+</div>
+<p>Since the p value is 0.8745 which is &gt;0.05 we failed to reject that the length of TE length has a strong affect on differential expression.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot the data </span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span>df_tranTE , <span class="fu">aes</span>(<span class="at">x =</span><span class="fu">log</span>(TE_length) , <span class="at">y =</span><span class="fu">log</span>(<span class="fu">abs</span>(log2FoldChange)))) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm , <span class="at">se =</span> F, <span class="at">linetype=</span><span class="st">"dashed"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Tyla-Perry-Project_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="we-further-investigated-if-te_class-sine-has-an-affect-on-longer-tes" class="level3">
+<h3 class="anchored" data-anchor-id="we-further-investigated-if-te_class-sine-has-an-affect-on-longer-tes">We further investigated if TE_class SINE has an affect on longer TE’s</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#filter dataframe</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df_tranTE_SINE<span class="ot">=</span><span class="fu">filter</span>(df_tranTE,TE_class<span class="sc">==</span><span class="st">"SINE"</span><span class="sc">|</span><span class="fu">is.na</span>(TE_class))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#preform a linear regresson based on filtered dataframe</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>lm_HA_SINE <span class="ot">=</span><span class="fu">lm</span>(<span class="at">formula =</span><span class="fu">log</span>(TE_length)<span class="sc">~</span> <span class="fu">log</span>(<span class="fu">abs</span>(log2FoldChange)) ,<span class="at">data =</span> df_tranTE_SINE)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Summary</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_HA_SINE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(TE_length) ~ log(abs(log2FoldChange)), data = df_tranTE_SINE)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.24478 -0.34758 -0.06514  0.50506  0.76118 
+
+Coefficients:
+                         Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)               4.40603    0.11901  37.022   &lt;2e-16 ***
+log(abs(log2FoldChange))  0.03007    0.09471   0.318    0.753    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.5363 on 29 degrees of freedom
+  (26332 observations deleted due to missingness)
+Multiple R-squared:  0.003465,  Adjusted R-squared:  -0.0309 
+F-statistic: 0.1008 on 1 and 29 DF,  p-value: 0.7531</code></pre>
+</div>
+</div>
+<p>Because the p value is 0.7531 which is &gt;0.05 we fail to reject the null hypothesis. SINE has no affect.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Change the line to a dashed line</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">ggplot</span>(<span class="at">data =</span>df_tranTE_SINE , <span class="fu">aes</span>(<span class="at">x =</span><span class="fu">log</span>(TE_length) , <span class="at">y =</span><span class="fu">log</span>(<span class="fu">abs</span>(log2FoldChange)))) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm , <span class="at">se =</span> F, <span class="at">linetype=</span><span class="st">"dashed"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Tyla-Perry-Project_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Conclusion</h1>
+<p>In summary, It can be concluded based on the results that our hypothesis was wrong based on what we found. It was revealed that transcripts that have TEs are not more differentially expressed. Also, the class of TE does not affect whether a transcribe is differentially expressed. Results showed that transcripts with TE have a higher log fold change.This means that the null hypothesis was accepted. When investigating if TE class SINE had an affect on TE results showed that SINE has no affect on TE which meant the null hypothesis stating that TE class SINE has an affect on TE. Wen investigating if TE length has an affect on expression, we failed to reject that the length of TE length has a strong affect on differential expression. Because the p value was larger than &lt;0.05 when finding out if SINE has an affect on longer TE’s, the null hypothesis was rejected.</p>
+<table class="table">
+<tbody>
+<tr class="odd">
+<td></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
